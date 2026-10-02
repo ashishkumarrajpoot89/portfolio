@@ -224,7 +224,7 @@
             Data Engineer · Python · SQL · ETL · Apache Airflow · Agentic AI
         </p>
         <div class="hero-cta" style="justify-content:center;">
-            <a href="{{ url_for('resume_download') }}" class="btn btn-primary">Download Resume</a>
+            <a href="{{ resume_download_url }}" download class="btn btn-primary">Download Resume</a>
             <a href="{{ url_for('static', filename=profile.resume_file) }}" target="_blank" rel="noopener" class="btn btn-outline">View Online</a>
         </div>
         <div class="handwritten purple" style="margin-top:16px;">Same Person, Bigger Goals</div>
@@ -248,7 +248,7 @@
             <div class="handwritten pink" style="text-align:center;">Open to new Opportunities!</div>
         </div>
         <div class="card">
-            <form method="POST" action="{{ url_for('contact_submit') }}">
+            <form method="POST" action="{{ contact_action }}">
                 <div class="form-group">
                     <input type="text" name="name" placeholder="Your Name" required>
                 </div>

@@ -8,6 +8,13 @@ import os
 app = Flask(__name__)
 app.secret_key = "ashish-portfolio-secret-key"
 
+# When exported as a static site (GitHub Pages), the Flask contact route won't
+# exist, so the form posts to Formspree instead. Set FORMSPREE_ENDPOINT to your
+# own Formspree form URL (https://formspree.io -> create form -> copy the URL).
+# When FREEZE=1 (used by freeze.py), the form uses this endpoint.
+FORMSPREE_ENDPOINT = os.environ.get("FORMSPREE_ENDPOINT", "https://formspree.io/f/your-form-id")
+IS_STATIC_BUILD = os.environ.get("FREEZE") == "1"
+
 # ---------------------------------------------------------------------------
 # Site-wide data (single source of truth, sourced from resume + GitHub)
 # ---------------------------------------------------------------------------
@@ -308,7 +315,20 @@ def inject_globals():
     # On the single-page home, anchor links are bare "#section".
     # On other pages (e.g. project detail) they become "/#section" to go home first.
     nav_base = "" if request.path == "/" else url_for("home")
-    return {"profile": PROFILE, "current_year": 2026, "nav_base": nav_base}
+    # Static build posts the contact form to Formspree; Flask build uses its route.
+    contact_action = FORMSPREE_ENDPOINT if IS_STATIC_BUILD else url_for("contact_submit")
+    # Static build links Download straight to the PDF; Flask build uses its route.
+    if IS_STATIC_BUILD:
+        resume_download_url = url_for("static", filename=PROFILE["resume_file"])
+    else:
+        resume_download_url = url_for("resume_download")
+    return {
+        "profile": PROFILE,
+        "current_year": 2026,
+        "nav_base": nav_base,
+        "contact_action": contact_action,
+        "resume_download_url": resume_download_url,
+    }
 
 
 @app.route("/")
