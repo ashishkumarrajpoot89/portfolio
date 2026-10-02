@@ -369,11 +369,24 @@ section { padding: 90px 0; }
 /* ---------- SKILLS logo tiles ---------- */
 .skill-tile img { width: 42px; height: 42px; margin-bottom: 12px; }
 .skill-tile { position: relative; }
-.ic-fallback {
-    width: 42px; height: 42px; margin: 0 auto 12px; border-radius: 10px;
-    display: grid; place-items: center; font-family: 'Space Grotesk'; font-weight: 700;
-    font-size: 1.2rem; color: #fff; background: var(--grad);
+.skill-tile.no-logo img { display: none; }
+
+/* Responsive logo grid — tiles wrap neatly regardless of count */
+.logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 14px;
+    margin-bottom: 14px;
 }
+
+/* Concept skills (no brand logo) shown as clean pills instead of letter badges */
+.skill-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+.skill-chip {
+    padding: 8px 15px; border-radius: 999px; font-size: .85rem; color: #ffd9c9;
+    background: rgba(255,65,3,.10); border: 1px solid var(--border);
+    transition: .2s;
+}
+.skill-chip:hover { background: rgba(255,65,3,.2); border-color: var(--primary); color: #fff; }
 .skills-accent { position: relative; }
 
 /* ---------- PROJECT scene illustrations ---------- */

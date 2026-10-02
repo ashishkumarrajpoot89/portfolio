@@ -103,21 +103,28 @@
     </div>
 
     {% for group, items in skills.items() %}
+    {% set logo_items = items | selectattr('slug') | list %}
+    {% set concept_items = items | rejectattr('slug') | list %}
     <div class="skill-group" data-group="{{ group }}" style="text-align:left;">
         <h3>{{ group }}</h3>
-        <div class="grid-4">
-            {% for skill in items %}
+        {% if logo_items %}
+        <div class="logo-grid">
+            {% for skill in logo_items %}
             <div class="skill-tile">
-                {% if skill.slug %}
                 <img src="https://cdn.simpleicons.org/{{ skill.slug }}/{{ skill.color }}" alt="{{ skill.name }}" loading="lazy"
-                     onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ic-fallback',textContent:'{{ skill.name[0] }}'}))">
-                {% else %}
-                <span class="ic-fallback">{{ skill.name[0] }}</span>
-                {% endif %}
+                     onerror="this.closest('.skill-tile').classList.add('no-logo')">
                 <span class="nm">{{ skill.name }}</span>
             </div>
             {% endfor %}
         </div>
+        {% endif %}
+        {% if concept_items %}
+        <div class="skill-chips">
+            {% for skill in concept_items %}
+            <span class="skill-chip">{{ skill.name }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
     {% endfor %}
 </section>

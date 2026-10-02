@@ -19,7 +19,7 @@ IS_STATIC_BUILD = os.environ.get("FREEZE") == "1"
 # Site-wide data (single source of truth, sourced from resume + GitHub)
 # ---------------------------------------------------------------------------
 PROFILE = {
-    "name": "Ashish Kumar",
+    "name": "Ashish Kumar Rajpoot",
     "roles": ["Data Engineer", "Data Analyst", "Python Developer"],
     "tagline": "Turning data into meaningful insights and building scalable solutions for a better tomorrow.",
     "location": "Delhi & Noida, India",
@@ -85,15 +85,15 @@ SKILLS = {
         {"name": "Databricks", "slug": "databricks", "color": "FF3621"},
     ],
     "Data Transformation & Orchestration": [
-        {"name": "dbt", "slug": "dbt", "color": "FF694B"},
         {"name": "Apache Airflow", "slug": "apacheairflow", "color": "017CEE"},
+        {"name": "dbt", "slug": None, "color": None},
     ],
     "Databases & Data Warehousing": [
         {"name": "MySQL", "slug": "mysql", "color": "4479A1"},
         {"name": "PostgreSQL", "slug": "postgresql", "color": "4169E1"},
         {"name": "ClickHouse", "slug": "clickhouse", "color": "FFCC01"},
         {"name": "SQLite", "slug": "sqlite", "color": "003B57"},
-        {"name": "Amazon Redshift", "slug": "amazonredshift", "color": "8C4FFF"},
+        {"name": "Amazon Redshift", "slug": None, "color": None},
         {"name": "Snowflake", "slug": "snowflake", "color": "29B5E8"},
         {"name": "BigQuery", "slug": "googlebigquery", "color": "669DF6"},
     ],
@@ -107,23 +107,23 @@ SKILLS = {
     "Cloud (AWS)": [
         {"name": "Amazon S3", "slug": None, "color": None},
         {"name": "AWS Glue", "slug": None, "color": None},
-        {"name": "Amazon Redshift", "slug": "amazonredshift", "color": "8C4FFF"},
+        {"name": "Amazon Redshift", "slug": None, "color": None},
         {"name": "Amazon Athena", "slug": None, "color": None},
         {"name": "Amazon EMR", "slug": None, "color": None},
-        {"name": "AWS Lambda", "slug": "awslambda", "color": "FF9900"},
+        {"name": "AWS Lambda", "slug": None, "color": None},
         {"name": "AWS IAM", "slug": None, "color": None},
         {"name": "AWS DMS", "slug": None, "color": None},
         {"name": "Amazon Kinesis", "slug": None, "color": None},
     ],
     "Cloud Platforms": [
-        {"name": "AWS", "slug": "amazonwebservices", "color": "FF9900"},
         {"name": "GCP (familiar)", "slug": "googlecloud", "color": "4285F4"},
+        {"name": "AWS", "slug": None, "color": None},
         {"name": "Azure (familiar)", "slug": None, "color": None},
     ],
     "Data Lakehouse & Storage": [
-        {"name": "Delta Lake", "slug": None, "color": None},
-        {"name": "Apache Iceberg", "slug": "apacheiceberg", "color": "1C1C1C"},
         {"name": "Parquet", "slug": "apacheparquet", "color": "50ABF1"},
+        {"name": "Delta Lake", "slug": None, "color": None},
+        {"name": "Apache Iceberg", "slug": None, "color": None},
     ],
     "APIs & Development": [
         {"name": "FastAPI", "slug": "fastapi", "color": "009688"},
@@ -141,8 +141,8 @@ SKILLS = {
         {"name": "Data Preprocessing", "slug": None, "color": None},
     ],
     "BI & Visualization": [
-        {"name": "Power BI", "slug": "powerbi", "color": "F2C811"},
         {"name": "Apache Superset", "slug": "apachesuperset", "color": "20A6C9"},
+        {"name": "Power BI", "slug": None, "color": None},
         {"name": "Matplotlib", "slug": None, "color": None},
         {"name": "Seaborn", "slug": None, "color": None},
     ],
@@ -151,10 +151,10 @@ SKILLS = {
         {"name": "Git", "slug": "git", "color": "F05032"},
         {"name": "GitHub", "slug": "github", "color": "FFFFFF"},
         {"name": "DataGrip", "slug": "datagrip", "color": "22D88F"},
-        {"name": "VS Code", "slug": "visualstudiocode", "color": "007ACC"},
         {"name": "Jupyter", "slug": "jupyter", "color": "F37626"},
-        {"name": "Excel", "slug": "microsoftexcel", "color": "217346"},
         {"name": "Google Sheets", "slug": "googlesheets", "color": "34A853"},
+        {"name": "VS Code", "slug": None, "color": None},
+        {"name": "Excel", "slug": None, "color": None},
     ],
 }
 
