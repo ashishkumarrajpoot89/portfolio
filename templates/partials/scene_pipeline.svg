@@ -1,0 +1,21 @@
+<svg class="scene-svg" viewBox="0 0 320 168" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="skyP" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#002231"/><stop offset="1" stop-color="#001018"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="168" fill="url(#skyP)"/>
+  <path d="M60 60 q40 -30 80 0 q40 30 80 0 q30 -20 40 0" fill="none" stroke="#FF4103" stroke-width="3" opacity="0.6"/>
+  <ellipse cx="160" cy="52" rx="52" ry="26" fill="#FF4103" opacity="0.8"/>
+  <ellipse cx="130" cy="58" rx="34" ry="20" fill="#ff8a5c" opacity="0.8"/>
+  <g>
+    <rect x="50" y="105" width="46" height="40" rx="6" fill="#042a3a" stroke="#FF4103"/>
+    <rect x="137" y="105" width="46" height="40" rx="6" fill="#042a3a" stroke="#ff6a3d"/>
+    <rect x="224" y="105" width="46" height="40" rx="6" fill="#042a3a" stroke="#ff8a5c"/>
+    <line x1="96" y1="125" x2="137" y2="125" stroke="#FF4103" stroke-width="3"/>
+    <line x1="183" y1="125" x2="224" y2="125" stroke="#FF4103" stroke-width="3"/>
+    <circle cx="73" cy="125" r="8" fill="#FF4103"/>
+    <circle cx="160" cy="125" r="8" fill="#ff6a3d"/>
+    <circle cx="247" cy="125" r="8" fill="#ff8a5c"/>
+  </g>
+</svg>

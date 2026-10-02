@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}404 - Lost in Data Space{% endblock %}
+
+{% block content %}
+<section class="container notfound space-bg">
+    <span class="planet p1"></span>
+    <span class="planet p2"></span>
+    <span class="astronaut">👨‍🚀</span>
+    <div class="big">404</div>
+    <h2 class="section-title">Lost in Data Space?</h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto;">
+        Looks like this page doesn't exist. Even in data, missing values can teach us something.
+    </p>
+    <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+    <div class="handwritten" style="margin-top:20px;">Missing values can teach us something.</div>
+</section>
+{% endblock %}

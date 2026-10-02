@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+{% block title %}Ashish Kumar | Data Engineer & Analyst{% endblock %}
+
+{% block content %}
+
+<!-- ============ HOME / HERO ============ -->
+<section id="home" class="container">
+    <div class="hero">
+        <div class="hero-text">
+            <span class="eyebrow">Data · Code · Insights · Impact</span>
+            <h1>Hi, I'm <span class="name">{{ profile.name }}</span></h1>
+            <p class="roles">
+                {% for r in profile.roles %}{{ r }}{% if not loop.last %} <span class="sep">|</span> {% endif %}{% endfor %}
+            </p>
+            <p class="lead">{{ profile.tagline }}</p>
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#resume" class="btn btn-outline">Download Resume</a>
+            </div>
+            <div class="hero-socials">
+                <a href="{{ profile.github }}" target="_blank" rel="noopener">GH</a>
+                <a href="{{ profile.linkedin }}" target="_blank" rel="noopener">IN</a>
+                <a href="mailto:{{ profile.email }}">@</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-scene">
+                <div class="globe"></div>
+                <span class="float-word w1">Code</span>
+                <span class="float-word w2">Analyze</span>
+                <span class="float-word w3">Visualize</span>
+                <span class="float-word w4">Impact</span>
+                <div class="hero-photo-wrap">
+                    <img src="{{ url_for('static', filename=profile.photo) }}" alt="{{ profile.name }}"
+                         class="hero-photo"
+                         onerror="this.src='{{ url_for('static', filename='img/placeholder.svg') }}'">
+                    <div class="hoodie-badge">DATA BUILDS TOMORROW</div>
+                </div>
+                <span class="plant">🪴</span>
+                <a href="#about" class="scroll-down">
+                    <div class="mouse"></div>
+                    Scroll Down
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats">
+        {% for s in stats %}
+        <div class="stat">
+            <div class="num">{{ s.value }}</div>
+            <div class="label">{{ s.label }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="container">
+    <span class="section-tag">About Me</span>
+    <h2 class="section-title">More Than Just A Data Professional</h2>
+    <div class="about-grid">
+        <div>
+            <p class="section-sub">{{ profile.summary }}</p>
+            <div class="trait-grid">
+                {% set colors = ['#FF4103', '#ff6a3d', '#ff8a5c', '#d6350a'] %}
+                {% for t in traits %}
+                <div class="trait">
+                    <span class="ic" style="background: {{ colors[loop.index0 % 4] }}22; color: {{ colors[loop.index0 % 4] }};">{{ t.icon }}</span>
+                    <span>{{ t.title }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="hero-cta" style="margin-top:28px;">
+                <a href="#contact" class="btn btn-primary">Let's Work Together</a>
+            </div>
+        </div>
+        <div>
+            <div class="about-scene">
+                <img src="{{ url_for('static', filename='img/award.jpg') }}" alt="{{ profile.name }}"
+                     class="about-photo-full"
+                     onerror="this.src='{{ url_for('static', filename=profile.photo) }}'">
+                <div class="sticky-note yellow">Curiosity<br>Today</div>
+                <div class="sticky-note green">Better<br>Solutions<br>Tomorrow</div>
+                <div class="poster">DISCIPLINE<br>CREATES<br>FREEDOM</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="container text-center">
+    <span class="section-tag">My Toolkit</span>
+    <h2 class="section-title">Skills &amp; Technologies</h2>
+    <p class="section-sub">A combination of tools and technologies I use to turn data into impact.</p>
+    <div class="handwritten purple" style="margin-bottom:20px;">Good Tools → Better Solutions</div>
+
+    <div class="filter-pills">
+        <button class="pill active" data-filter="all">All</button>
+        {% for group in skills.keys() %}
+        <button class="pill" data-filter="{{ group }}">{{ group }}</button>
+        {% endfor %}
+    </div>
+
+    {% for group, items in skills.items() %}
+    <div class="skill-group" data-group="{{ group }}" style="text-align:left;">
+        <h3>{{ group }}</h3>
+        <div class="grid-4">
+            {% for skill in items %}
+            <div class="skill-tile">
+                {% if skill.slug %}
+                <img src="https://cdn.simpleicons.org/{{ skill.slug }}/{{ skill.color }}" alt="{{ skill.name }}" loading="lazy"
+                     onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ic-fallback',textContent:'{{ skill.name[0] }}'}))">
+                {% else %}
+                <span class="ic-fallback">{{ skill.name[0] }}</span>
+                {% endif %}
+                <span class="nm">{{ skill.name }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="container">
+    <span class="section-tag">My Work</span>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-sub">Solving real-world problems with data and technology.</p>
+
+    <div class="grid-3">
+        {% for p in projects %}
+        <div class="card project-card">
+            <div class="project-thumb">{% include 'partials/scene_' + p.scene + '.svg' %}</div>
+            <div class="tag-row">
+                {% for tag in p.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+            </div>
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.short }}</p>
+            <div class="project-links">
+                <a href="{{ url_for('project_detail', slug=p.slug) }}">View Details →</a>
+                <a href="{{ p.github }}" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience" class="container">
+    <span class="section-tag">My Journey</span>
+    <h2 class="section-title">Work Experience</h2>
+    <p class="section-sub">A journey of learning, building, and creating impact.</p>
+
+    <div class="exp-layout">
+        <div class="timeline">
+            {% for e in experience %}
+            <div class="tl-item">
+                <div class="tl-period">{{ e.period }}</div>
+                <h3>{{ e.role }}</h3>
+                <div class="org">{{ e.org }}</div>
+                <ul>
+                    {% for pt in e.points %}<li>{{ pt }}</li>{% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="stairs-scene">
+            <span class="trophy">🏆</span>
+            <div class="step s1">Learn</div>
+            <div class="step s2">Improve</div>
+            <div class="step s3">Grow</div>
+            <div class="step s4"><span class="climber">🧗</span>Impact</div>
+            <div class="stairs-note handwritten pink">Small Steps<br>Big Progress</div>
+        </div>
+    </div>
+
+    <!-- Recognition: full-card image -->
+    <div class="recognition-card">
+        <img src="{{ url_for('static', filename='img/award.jpg') }}" alt="Ashish Kumar receiving an award"
+             class="recognition-img"
+             onerror="this.parentElement.style.display='none'">
+        <div class="recognition-overlay">
+            <span class="section-tag">Recognition</span>
+            <h3>Celebrating Milestones</h3>
+            <p>Recognized for consistent effort and impact — it keeps me driven to keep learning, building, and delivering value with data.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section id="education" class="container">
+    <div class="grid-2">
+        <div>
+            <span class="section-tag">Education</span>
+            <h2 class="section-title">Education</h2>
+            {% for ed in education %}
+            <div class="card" style="margin-bottom:18px;">
+                <h3>{{ ed.degree }}</h3>
+                <p style="color:var(--muted);">{{ ed.school }}</p>
+                <p class="tl-period">{{ ed.period }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            <span class="section-tag">Currently Learning</span>
+            <h2 class="section-title">Agentic AI &amp; GenAI</h2>
+            {% for c in learning %}
+            <div class="card" style="margin-bottom:14px; display:flex; align-items:center; gap:12px;">
+                <span style="color:var(--accent);">▹</span>
+                <span>{{ c }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ============ RESUME ============ -->
+<section id="resume" class="container">
+    <div class="resume-box">
+        <span class="section-tag">My Resume</span>
+        <h2 class="section-title">Download or view my latest resume</h2>
+        <p class="section-sub" style="margin-left:auto;margin-right:auto;">
+            Data Engineer · Python · SQL · ETL · Apache Airflow · Agentic AI
+        </p>
+        <div class="hero-cta" style="justify-content:center;">
+            <a href="{{ url_for('resume_download') }}" class="btn btn-primary">Download Resume</a>
+            <a href="{{ url_for('static', filename=profile.resume_file) }}" target="_blank" rel="noopener" class="btn btn-outline">View Online</a>
+        </div>
+        <div class="handwritten purple" style="margin-top:16px;">Same Person, Bigger Goals</div>
+    </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="container">
+    <span class="section-tag">Get In Touch</span>
+    <h2 class="section-title">Let's Build Something Amazing!</h2>
+    <div class="contact-grid">
+        <div>
+            <ul class="contact-info">
+                <li><span class="ic">✉</span> <a href="mailto:{{ profile.email }}">{{ profile.email }}</a></li>
+                <li><span class="ic">📞</span> {{ profile.phone }}</li>
+                <li><span class="ic">📍</span> {{ profile.location }}</li>
+                <li><span class="ic">in</span> <a href="{{ profile.linkedin }}" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><span class="ic">GH</span> <a href="{{ profile.github }}" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+            <div class="contact-illus">📨</div>
+            <div class="handwritten pink" style="text-align:center;">Open to new Opportunities!</div>
+        </div>
+        <div class="card">
+            <form method="POST" action="{{ url_for('contact_submit') }}">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

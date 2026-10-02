@@ -1,0 +1,20 @@
+<svg class="scene-svg" viewBox="0 0 320 168" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="skyD" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#002231"/><stop offset="1" stop-color="#001018"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="168" fill="url(#skyD)"/>
+  <rect x="30" y="30" width="120" height="108" rx="8" fill="#042a3a" stroke="#FF4103"/>
+  <rect x="44" y="95" width="14" height="30" fill="#FF4103"/>
+  <rect x="66" y="80" width="14" height="45" fill="#ff6a3d"/>
+  <rect x="88" y="60" width="14" height="65" fill="#ff8a5c"/>
+  <rect x="110" y="72" width="14" height="53" fill="#d6350a"/>
+  <rect x="170" y="30" width="120" height="50" rx="8" fill="#042a3a" stroke="#ff6a3d"/>
+  <polyline points="180,65 205,50 230,58 255,40 280,46" fill="none" stroke="#FF4103" stroke-width="3"/>
+  <rect x="170" y="90" width="120" height="48" rx="8" fill="#042a3a" stroke="#ff8a5c"/>
+  <circle cx="205" cy="114" r="18" fill="none" stroke="#5a1e0c" stroke-width="6"/>
+  <circle cx="205" cy="114" r="18" fill="none" stroke="#FF4103" stroke-width="6" stroke-dasharray="60 120" transform="rotate(-90 205 114)"/>
+  <rect x="245" y="104" width="34" height="6" rx="3" fill="#FF4103"/>
+  <rect x="245" y="118" width="24" height="6" rx="3" fill="#ff8a5c"/>
+</svg>
