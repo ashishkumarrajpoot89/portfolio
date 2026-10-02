@@ -28,34 +28,36 @@ def build_styles():
                                    textColor=ACCENT, alignment=TA_CENTER, spaceAfter=2),
         "contact": ParagraphStyle("contact", parent=s["Normal"], fontSize=8.8,
                                   textColor=colors.HexColor("#444444"), alignment=TA_CENTER, spaceAfter=9),
-        "h2": ParagraphStyle("h2", parent=s["Heading2"], fontSize=11, textColor=DARK,
-                             spaceBefore=6, spaceAfter=2, leading=13),
-        "role": ParagraphStyle("role", parent=s["Normal"], fontSize=9.4, textColor=DARK,
-                              spaceBefore=4, spaceAfter=1, leading=12),
-        "meta": ParagraphStyle("meta", parent=s["Normal"], fontSize=8.4,
+        "h2": ParagraphStyle("h2", parent=s["Heading2"], fontSize=10.5, textColor=DARK,
+                             spaceBefore=5, spaceAfter=1, leading=12),
+        "role": ParagraphStyle("role", parent=s["Normal"], fontSize=9.2, textColor=DARK,
+                              spaceBefore=3, spaceAfter=1, leading=11.5),
+        "meta": ParagraphStyle("meta", parent=s["Normal"], fontSize=8.3,
                               textColor=colors.HexColor("#666666"), spaceAfter=1),
-        "body": ParagraphStyle("body", parent=s["Normal"], fontSize=9, leading=11.5,
+        "body": ParagraphStyle("body", parent=s["Normal"], fontSize=8.8, leading=11,
                               alignment=TA_JUSTIFY, spaceAfter=2),
-        "bullet": ParagraphStyle("bullet", parent=s["Normal"], fontSize=9, leading=11.5),
+        "bullet": ParagraphStyle("bullet", parent=s["Normal"], fontSize=8.8, leading=11),
+        "skills": ParagraphStyle("skills", parent=s["Normal"], fontSize=8, leading=9.7,
+                               alignment=TA_JUSTIFY, spaceAfter=1.2),
     }
     return styles
 
 
 def rule():
-    return HRFlowable(width="100%", thickness=1, color=ACCENT, spaceBefore=1, spaceAfter=3)
+    return HRFlowable(width="100%", thickness=1, color=ACCENT, spaceBefore=1, spaceAfter=2.5)
 
 
 def bullets(items, st):
     return ListFlowable(
         [ListItem(Paragraph(t, st["bullet"]), leftIndent=10, value="•") for t in items],
-        bulletType="bullet", start="•", leftIndent=12, bulletColor=ACCENT, spaceBefore=0, spaceAfter=2,
+        bulletType="bullet", start="•", leftIndent=12, bulletColor=ACCENT, spaceBefore=0, spaceAfter=1.5,
     )
 
 
 def main():
     st = build_styles()
-    doc = SimpleDocTemplate(OUT, pagesize=A4, leftMargin=15 * mm, rightMargin=15 * mm,
-                            topMargin=12 * mm, bottomMargin=11 * mm, title="Ashish Kumar - Resume")
+    doc = SimpleDocTemplate(OUT, pagesize=A4, leftMargin=14 * mm, rightMargin=14 * mm,
+                            topMargin=11 * mm, bottomMargin=10 * mm, title="Ashish Kumar - Resume")
     e = []
 
     e.append(Paragraph("ASHISH KUMAR", st["name"]))
@@ -118,15 +120,19 @@ def main():
     e.append(Paragraph("TECHNICAL SKILLS", st["h2"]))
     e.append(rule())
     for label, items in [
-        ("Programming &amp; Data Engineering", "Python, SQL, ETL, ELT, Apache Airflow, Data Modeling, Data Integration, Schema Validation, Multiprocessing"),
-        ("Databases", "MySQL, PostgreSQL, ClickHouse, SQLite"),
-        ("Cloud (AWS)", "S3, Glue, Redshift, Athena, EMR, Lambda, IAM | Also familiar with GCP, Azure"),
+        ("Programming &amp; Data Engineering", "Python, SQL, ETL, ELT, Data Pipelines, Data Integration, Data Modeling, Data Warehousing, Data Lake, Data Lakehouse, Batch &amp; Stream Processing, Schema Validation, Schema Evolution, Data Quality, Multiprocessing"),
+        ("Big Data &amp; Distributed Processing", "Apache Hadoop, HDFS, YARN, Apache Hive, Apache Spark, PySpark, Databricks"),
+        ("Transformation &amp; Orchestration", "dbt, Apache Airflow"),
+        ("Databases &amp; Warehousing", "MySQL, PostgreSQL, ClickHouse, SQLite, Amazon Redshift, Snowflake, BigQuery"),
+        ("Streaming &amp; CDC", "Apache Kafka, Amazon Kinesis, AWS DMS, Debezium, Change Data Capture (CDC)"),
+        ("Cloud (AWS)", "Amazon S3, AWS Glue, Redshift, Athena, EMR, Lambda, IAM, DMS, Kinesis | Familiar with GCP &amp; Azure"),
+        ("Data Lakehouse &amp; Storage", "Delta Lake, Apache Iceberg, Parquet"),
         ("APIs &amp; Development", "FastAPI, REST APIs, Strapi, Directus, Streamlit"),
-        ("Data &amp; Analytics", "Pandas, NumPy, Scikit-learn, SciPy, Data Cleaning, Data Preprocessing"),
+        ("Data &amp; Analytics", "Pandas, NumPy, SciPy, Scikit-learn, Data Cleaning, Data Preprocessing"),
         ("BI &amp; Visualization", "Power BI, Apache Superset, Matplotlib, Seaborn"),
-        ("Tools", "Git, GitHub, DataGrip, VS Code, Jupyter Notebook, Excel, Google Sheets"),
+        ("DevOps &amp; Tools", "Docker, Git, GitHub, DataGrip, VS Code, Jupyter Notebook, Excel, Google Sheets"),
     ]:
-        e.append(Paragraph(f"<b>{label}:</b> {items}", st["body"]))
+        e.append(Paragraph(f"<b>{label}:</b> {items}", st["skills"]))
 
     e.append(Paragraph("CURRENTLY LEARNING — AGENTIC AI &amp; GENAI", st["h2"]))
     e.append(rule())
