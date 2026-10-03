@@ -14,6 +14,8 @@ app.secret_key = "ashish-portfolio-secret-key"
 # When FREEZE=1 (used by freeze.py), the form uses this endpoint.
 FORMSPREE_ENDPOINT = os.environ.get("FORMSPREE_ENDPOINT", "https://formspree.io/f/your-form-id")
 IS_STATIC_BUILD = os.environ.get("FREEZE") == "1"
+# Public site URL (used for canonical + Open Graph tags).
+SITE_URL = os.environ.get("SITE_URL", "https://ashishkumarrajpoot89.github.io")
 
 # ---------------------------------------------------------------------------
 # Site-wide data (single source of truth, sourced from resume + GitHub)
@@ -385,12 +387,18 @@ def inject_globals():
         resume_download_url = url_for("static", filename=PROFILE["resume_file"])
     else:
         resume_download_url = url_for("resume_download")
+    meta_description = (
+        "Ashish Kumar Rajpoot — Data Engineer building Python ETL/ELT pipelines, SQL workflows and "
+        "data-quality systems. Experienced with Apache Airflow, Spark, AWS, FastAPI; upskilling in Agentic AI."
+    )
     return {
         "profile": PROFILE,
         "current_year": 2026,
         "nav_base": nav_base,
         "contact_action": contact_action,
         "resume_download_url": resume_download_url,
+        "site_url": SITE_URL,
+        "meta_description": meta_description,
     }
 
 

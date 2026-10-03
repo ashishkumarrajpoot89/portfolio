@@ -78,7 +78,7 @@ def main():
 
     e.append(Paragraph("PROFESSIONAL EXPERIENCE", st["h2"]))
     e.append(rule())
-    e.append(Paragraph("<b>Junior Software Developer</b> | Samarth eGov (Ministry of Education, GoI)", st["role"]))
+    e.append(Paragraph("<b>Software Developer</b> | Samarth eGov (Ministry of Education, GoI)", st["role"]))
     e.append(Paragraph("June 2026 - Present", st["meta"]))
     e.append(bullets([
         "As part of the Data Science Team, developed and maintained a rank-and-preference-based seat allocation "

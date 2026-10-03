@@ -1,7 +1,16 @@
 [project]
-name = "portfolio"
-version = "0.1.0"
-description = "Add your description here"
+name = "ashish-portfolio"
+version = "1.0.0"
+description = "Ashish Kumar Rajpoot — Data Engineer portfolio (Flask, single-page, static-exportable)."
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "Flask==3.0.3",
+    "gunicorn==21.2.0",
+    "reportlab==4.2.2",
+    "Frozen-Flask==1.0.2",
+]
+
+[project.urls]
+Homepage = "https://ashishkumarrajpoot89.github.io/"
+Repository = "https://github.com/ashishkumarrajpoot89/ashishkumarrajpoot89.github.io"

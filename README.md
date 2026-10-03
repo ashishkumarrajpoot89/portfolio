@@ -1,42 +1,64 @@
-# Ashish Kumar — Portfolio Website
+# Ashish Kumar Rajpoot — Portfolio
 
-A dark-themed data-professional portfolio built with **Python + Flask**, matching the 12-page design.
+A single-page data-professional portfolio built with **Python + Flask**, themed in Combo 09
+(Vulcanico orange `#FF4103` on Noturno navy `#001621`). It runs as a live Flask app or can be
+exported to static HTML for GitHub Pages.
 
-## Pages
-Home (hero + stats), About, Skills & Tools, Projects (+ project detail), Experience, Education & Certifications, Resume, Blog, Contact, and a custom 404 ("Lost in Data Space").
+**Live:** https://ashishkumarrajpoot89.github.io/
 
-## Run it locally
+## Sections
+Home (hero + stats) · About · Skills · Projects (+ detail pages) · Experience · Education ·
+Resume (download/view) · Contact · custom 404.
+
+## Run locally
 
 ```bash
 pip install -r requirements.txt
 python app.py
 ```
+Open http://localhost:5000  (debug auto-reload on).
 
-Then open http://localhost:5000
+## Edit content
+All text (profile, skills, projects, experience, education, learning) lives in the data
+dictionaries at the top of **`app.py`** — edit there and the whole site updates.
 
-## Add your real photo and resume
+## Regenerate assets
+- **Resume PDF** (one page, from resume content):
+  ```bash
+  pip install reportlab
+  python generate_resume_pdf.py        # -> static/resume.pdf
+  ```
+  Prefer your own PDF? Just drop it in as `static/resume.pdf`.
+- **Social share image** (1200x630 OG card):
+  ```bash
+  pip install pillow
+  python generate_og_image.py          # -> static/img/og-image.png
+  ```
 
-The site works out of the box with a placeholder image. To use your own:
+## Build static site (GitHub Pages)
 
-1. Save your photo as: `static/img/profile.jpg`
-2. Save your resume as: `static/resume.pdf`
+```bash
+# PowerShell:  $env:FREEZE=1; python freeze.py
+FREEZE=1 python freeze.py              # -> ./build
+```
+The contact form posts to Formspree in the static build; set your endpoint via the
+`FORMSPREE_ENDPOINT` env var (or a repo secret of the same name for CI).
 
-No code changes needed — the templates already point to these paths, and the download button + PDF preview will work once `resume.pdf` is present.
+## Deployment
+- **GitHub Pages** (static): pushing to `main` triggers `.github/workflows/deploy-pages.yml`,
+  which runs `freeze.py` and publishes `./build`. Pages source = GitHub Actions.
+- **Render / Railway** (live Flask app): uses `Procfile` (`gunicorn app:app`) and `render.yaml`.
 
-## Where to edit content
-
-All text (summary, skills, projects, experience, education, certifications, blog posts, social links) lives in the data dictionaries at the top of **`app.py`** — edit there and the whole site updates.
-
-## Structure
-
+## Project structure
 ```
 portfolio/
-├── app.py                 # Flask app + all site content
+├── app.py                  # Flask app + all site content
+├── freeze.py               # Frozen-Flask static export
+├── generate_resume_pdf.py  # builds static/resume.pdf
+├── generate_og_image.py    # builds static/img/og-image.png
 ├── requirements.txt
-├── templates/             # Jinja2 templates (one per page + base layout)
-└── static/
-    ├── css/style.css      # Dark theme, gradients, responsive
-    ├── js/main.js         # Nav toggle, skills filter, scroll reveal
-    ├── img/               # profile.jpg goes here
-    └── resume.pdf         # your resume goes here
+├── Procfile / render.yaml  # live-host config
+├── .github/workflows/      # GitHub Pages auto-deploy
+├── templates/              # base + index + project_detail + 404 + partials
+└── static/                 # css, js, img, resume.pdf
 ```

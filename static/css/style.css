@@ -197,8 +197,9 @@ section { padding: 90px 0; }
 
 /* ---------- Contact ---------- */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; }
-.contact-info li { list-style: none; padding: 10px 0; color: var(--muted); display: flex; gap: 12px; }
-.contact-info .ic { color: var(--accent); }
+.contact-info li { list-style: none; padding: 10px 0; color: var(--muted); display: flex; align-items: center; gap: 12px; }
+.contact-info .ic { color: var(--accent); display: inline-flex; align-items: center; width: 20px; justify-content: center; }
+.footer .socials a { display: inline-flex; align-items: center; }
 .form-group { margin-bottom: 16px; }
 .form-group input, .form-group textarea {
     width: 100%; padding: 13px 16px; border-radius: 12px;
@@ -473,4 +474,23 @@ section[id] { scroll-margin-top: 80px; }
 @media (max-width: 560px) {
     .recognition-overlay { padding: 24px 18px 18px; }
     .recognition-overlay h3 { font-size: 1.3rem; }
+}
+
+/* ============================================================
+   ACCESSIBILITY — respect reduced-motion preference
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+    .float, .globe, .float-word, .trophy, .climber, .astronaut, .contact-illus { animation: none !important; }
+}
+
+/* Visible keyboard focus for links/buttons */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
